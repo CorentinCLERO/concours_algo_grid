@@ -12,3 +12,9 @@ X est un entier de 1 à 6
 ```bash
 python testsolution.py X
 ```
+
+## Viewer
+
+```bash
+python viewer.py X
+```

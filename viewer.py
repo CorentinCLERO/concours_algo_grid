@@ -1,4 +1,6 @@
 import json
+import sys
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
@@ -84,5 +86,35 @@ def viewer(input_file, solution_file):
 
     slider.on_changed(update)
     plt.show()
-    
-viewer("./datasets/1_example.json", "./solutions/1_example_submission.txt")
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python viewer.py <n>")
+        print("Exemple: python viewer.py 1")
+        sys.exit(1)
+
+    try:
+        dataset_id = int(sys.argv[1])
+        if dataset_id <= 0:
+            raise ValueError
+    except ValueError:
+        print("Erreur: <n> doit etre un entier positif (ex: 1, 2, 3).")
+        sys.exit(1)
+
+    root = Path(__file__).resolve().parent
+    dataset_path = root / "datasets" / f"dataset_{dataset_id}.json"
+    solution_path = root / "solutions" / f"solution_{dataset_id}.txt"
+
+    if not dataset_path.exists():
+        print(f"Erreur: dataset introuvable: {dataset_path}")
+        sys.exit(1)
+    if not solution_path.exists():
+        print(f"Erreur: solution introuvable: {solution_path}")
+        sys.exit(1)
+
+    viewer(str(dataset_path), str(solution_path))
+
+
+if __name__ == "__main__":
+    main()
