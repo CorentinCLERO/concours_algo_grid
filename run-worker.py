@@ -1,6 +1,7 @@
 import argparse
 
-from solvers.greedy_montecarlo_joker import run_solver as run_solver_with_joker
+from solvers.solver_dataset_1 import run_solver as run_solver_dataset_1
+from solvers.solver_dataset_2 import run_solver as run_solver_dataset_2
 from solvers.solver_dataset_4 import run_solver as run_solver_dataset_4
 from solvers.solver_dataset_3 import run_solver as run_solver_dataset_3
 
@@ -14,8 +15,18 @@ def main() -> None:
     parser.add_argument("--write", action="store_true", help="Write solution to solutions/solution_<dataset>.txt")
     args = parser.parse_args()
 
-    if args.dataset in (1, 2):
-        run_solver_with_joker(
+    if args.dataset == 1:
+        run_solver_dataset_1(
+            dataset_id=args.dataset,
+            iterations=args.iterations,
+            restarts=args.restarts,
+            workers=args.workers,
+            write_solution=args.write,
+        )
+        return
+
+    if args.dataset == 2:
+        run_solver_dataset_2(
             dataset_id=args.dataset,
             iterations=args.iterations,
             restarts=args.restarts,
