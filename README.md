@@ -47,3 +47,11 @@ python run-worker --dataset 5 --workers 1 --no-progress
 
 La dépendance utilisée pour la progression est `tqdm`.
 
+## Solver dédié pour `dataset_6`
+
+`dataset_6` utilise un solver dédié orienté grandes grilles (1000x1000), avec sélection de rectangles exacts et jokers 10x10.
+
+```bash
+python run-worker --dataset 6 --restarts 6 --workers 2 --write
+```
+

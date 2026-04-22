@@ -5,11 +5,12 @@ from solvers.solver_dataset_2 import run_solver as run_solver_dataset_2
 from solvers.solver_dataset_3 import run_solver as run_solver_dataset_3
 from solvers.solver_dataset_4 import run_solver as run_solver_dataset_4
 from solvers.solver_dataset_5 import run_solver as run_solver_dataset_5
+from solvers.solver_dataset_6 import run_solver as run_solver_dataset_6
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Dispatcher vers le solver greedy + monte carlo du dataset choisi")
-    parser.add_argument("--dataset", type=int, required=True, choices=[1, 2, 3, 4, 5], help="Dataset number (1, 2, 3, 4, 5)")
+    parser.add_argument("--dataset", type=int, required=True, choices=[1, 2, 3, 4, 5, 6], help="Dataset number (1, 2, 3, 4, 5, 6)")
     parser.add_argument("--iterations", type=int, default=5000, help="MC iterations per restart")
     parser.add_argument("--restarts", type=int, default=6, help="Number of random restarts")
     parser.add_argument("--workers", type=int, default=1, help="Nombre de processus CPU (1 = desactive le parallelisme)")
@@ -59,7 +60,18 @@ def main() -> None:
         )
         return
 
-    run_solver_dataset_5(
+    if args.dataset == 5:
+        run_solver_dataset_5(
+            dataset_id=args.dataset,
+            iterations=args.iterations,
+            restarts=args.restarts,
+            workers=args.workers,
+            write_solution=args.write,
+            show_progress=args.progress,
+        )
+        return
+
+    run_solver_dataset_6(
         dataset_id=args.dataset,
         iterations=args.iterations,
         restarts=args.restarts,
